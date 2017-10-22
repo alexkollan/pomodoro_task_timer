@@ -6,7 +6,18 @@ body{
 }
 .container{
     width: 90vw;
+    /* margin-top: 2em; */
 }
+
+.row{
+    margin-top: 10px;
+}
+.errorMsg{
+position: absolute;
+width: 100%;
+text-align: center;
+}
+
 .left-side {
     margin-top: 50px;
     /* margin-right: 20px; */
@@ -41,6 +52,7 @@ body{
     line-height: 6.8em;
     font-size: 3em;
     flex-grow: 1;
+
     
 }
 .breakCount{

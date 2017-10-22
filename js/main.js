@@ -4,22 +4,95 @@ let minutes = 0;
 let seconds = 0;
 let breakTime = 0;
 let taskList = [];
-taskList.add = (num, name, time) => {
+let currentTask = 0;
+taskList.add = (num, name,btime, time) => {
     taskList.push({
         number: num,
         name: name,
+        break_time: btime,
         time: time
     })
-
+    currentTask++;
 }
 let currentlyDoing = 0;
 
-function takeTime(t) {
-    return (t.hours * 60 * 60) + (t.minutes * 60) + t.seconds;
+function displayMessage(type, message){
+    $('#messages').html('');
+    let cssClass;
+    type == 'error' ? cssClass = 'danger' : cssClass = 'success';
+    let template = `
+    <div class="alert alert-dismissible alert-${cssClass} errorMsg">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <a href="#" class="alert-link">${message}</div>
+    `;
+    $('#messages').show().append(template).delay(5000).fadeOut(1400);
+}
+
+function takeTime(task) {
+    return (task.hours * 60 * 60) + (task.minutes * 60) + task.seconds;
     console.log(time);
 }
 
+function breakTimer(btimeLeft,btimeTotal) {
+    console.log('Current Task number: ', currentlyDoing);
+    $('.btnText').html('')
+
+    $('.btnText').append(`Break Time!`);
+    let countDown = setInterval(() => {
+
+        let hours = Math.floor(btimeLeft / 3600);
+        let minutesLeft = Math.floor((btimeLeft) - (hours * 3600));
+        let minutes = Math.floor(minutesLeft / 60);
+        let seconds = btimeLeft % 60;
+        $('#disTimer').html(`
+        ${(hours <10 ? '0':'')+String(hours)}:${(minutes <10 ? '0':'')+String(minutes)}:${(seconds <10 ? '0':'')+String(seconds)}
+        `);
+
+        let percent = (btimeLeft / btimeTotal) * 100;
+
+        $('#prgrBar').css({
+            width: `${100 - percent}%`
+        })
+        btimeLeft = btimeLeft - 1;
+
+        let displayTime = `tasklist`;
+        
+        if (btimeLeft < 0) {
+            $('#prgrBar').css({
+                width: `100%`
+            })
+            clearInterval(countDown);
+            console.log(currentlyDoing);
+            let time = takeTime(taskList[(currentlyDoing)].time);
+            if(taskList[currentlyDoing + 1] == undefined){
+                $('.btnText').html('');
+                $('.btnText').append(`Start`);
+                $('#prgrBar').css({
+                    width: `0%`
+                })
+                currentlyDoing = 0;
+            }else{
+                currentlyDoing++;
+                startTimer(time, time, taskList);
+            }
+            
+            
+        }
+    }, 1000)
+
+}
+
 function startTimer(timeLeft, timeTotal, task) {
+    console.log('Current Task number: ', currentlyDoing);
+    console.log(breakTime);
+    
+    $('.btnText').html('')
+    // $('.btnText').css({
+    //     "font-size": "3vh",
+    //     "border": "1px solid white" 
+
+    // })
+    $('.btnText').append(`Task <strong>no${task[currentlyDoing].number}</strong>`);
     let countDown = setInterval(() => {
 
         // let days        = Math.floor(timeLeft/24/60/60);
@@ -48,28 +121,45 @@ function startTimer(timeLeft, timeTotal, task) {
                 width: `100%`
             })
             clearInterval(countDown);
-            console.log(currentlyDoing);
+            console.log('Current Task number: ',currentlyDoing);
+            breakTimer((taskList[0].break_time)*60,(taskList[0].break_time*60));
 
         }
     }, 1000)
-    currentlyDoing++;
+    
+
+    
 }
 
 $('#startBtn').on('click', () => {
-    console.log(currentlyDoing);
-    let time = takeTime(taskList[currentlyDoing].time);
-    startTimer(time, time, taskList);
+    $('#messages').html('');
+    if(taskList[0] == null){
+        displayMessage('error', `It seems you didn't add a task. Add a task in the Insert Task section, then Insert the Time, press Add and then Start the timer.`);
+    }else{
+        console.log(currentlyDoing);
+        let time = takeTime(taskList[currentlyDoing].time);
+        startTimer(time, time, taskList);
+    }
+
 
 })
 
 
 $('#addtskbtn').on('click', () => {
     let task = $('#taskinput').val();
-    console.log(task);
-    addTask(task);
+    if(task == ''){
+        displayMessage('error', `Cannot add a task without a Title. Add the title then the time and then press Add.`);
+    }else if(hours == 0 && minutes == 0 && seconds ==0){
+        displayMessage('error',`Add the time to your task!!`);
+    }else{
+        
+        console.log(task);
+        addTask(task);
+    }
+
 })
 
-function addTask(t, c) {
+function addTask(t) {
     currentTaskNum++;
     let taskTemplate = `
     <div class="panel panel-primary tasks">
@@ -83,11 +173,12 @@ function addTask(t, c) {
     </div>
     
     `
-    taskList.add(currentTaskNum, t, {
+    taskList.add(currentTaskNum, t, breakTime, {
         'hours': hours,
         'minutes': minutes,
         'seconds': seconds
     });
+    displayMessage('success', `Task #${currentTask} succesfully added!`)
     $('#taskList').append(taskTemplate);
     console.log(taskList);
 }
