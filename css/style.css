@@ -1,0 +1,143 @@
+body{
+    color: #EBE1C7;
+}
+.brd {
+    border: 1px solid white;
+}
+.container{
+    width: 90vw;
+}
+.left-side {
+    margin-top: 50px;
+    /* margin-right: 20px; */
+    text-align: center;
+    background: rgb(51, 73, 94);
+    border-radius: 20px;
+    box-shadow: -1px 3px 20px  black;
+    /* height: 80vh; */
+}
+
+.secTitle {
+    font-size: 5em;
+}
+
+.bigRndButton {
+    margin: 0 auto;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    max-width: 7em;
+    max-height: 7em;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 6.8em;
+    font-size: 3em;
+    flex-grow: 1;
+    
+}
+.breakCount{
+    flex-grow: 1;
+    max-width: 12.3em;
+    margin-top: 10%;
+    
+    /* padding-left: 100px; */
+}
+.breakTimeText{
+    font-size: 1.5em;
+}
+.startPauseGrp{
+    display: flex;
+}
+
+.bigRndButton:hover {
+    cursor: pointer;
+    color: #2B3E50;
+}
+
+.timerCont {
+    display: flex;
+    max-width: 10.5em;
+    font-size: 2em;
+    text-align: center;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+.timeHoursCont,
+.timeMinCont,
+.timeSecCont {
+    /* border: 1px solid white; */
+    flex-grow: 1;
+}
+
+.plusBtn,
+.minusBtn:hover {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.pright {
+    border-top-right-radius: 11px;
+}
+
+.mright {
+    border-bottom-right-radius: 11px;
+}
+
+.pleft {
+    border-top-left-radius: 11px;
+}
+
+.mleft {
+    border-bottom-left-radius: 11px;
+}
+.timer{
+    font-size: 3em;
+    text-align: right;
+    padding-right: 5px;
+}
+.right-side{
+    margin-top: 50px;
+    text-align: center;
+    background: rgb(51, 73, 94);
+    border-radius: 20px;
+    box-shadow: -1px 3px 20px  black;
+    /* height: 80vh; */
+}
+.margIt{
+    margin: 20px;
+    
+}
+.textTimer{
+    font-size: 2em;
+    font-weight: 800;
+}
+.control-label{
+    font-size: 2em;
+}
+.input-group-addon{
+    background: #DF691A;
+}
+.tasks{
+    margin: 8px;
+}

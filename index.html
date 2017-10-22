@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title>Pomodoro Timer</title>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href='https://bootswatch.com/superhero/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/style.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 left-side">
+                <div class="secTitle">
+                    Pomodoro Timer
+                </div>
+                <div class='startPauseGrp '>
+                        <div id='startBtn' class="bigRndButton btn-primary ">Start</div>
+                        <div class="breakCount ">
+                                <h3>Break Time</h3>
+                                <div id="mplusBtn" onclick="timeBtn('add', 'b')" class="plusBtn pright pleft btn-success breakTimeText">+</div>
+                                <div id="bText" class="breakTimeText">00m</div>
+                                <div id="mminusBtn" onclick="timeBtn('sub', 'b')" class="minusBtn mright mleft btn-danger breakTimeText">-</div>
+                            </div>
+                </div>
+ 
+                <div id='disTimer' class="timer">00:00:00</div>
+                <div class="progress progress-striped active">
+                    <div id='prgrBar' class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1 right-side">
+                <div class="form-group margIt">
+                    <label class="control-label">Insert Task</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">Task</span>
+                        <input id="taskinput" type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button id="addtskbtn" class="btn btn-success" type="button">Add</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="textTimer">
+                    Insert Time
+                </div>
+                <div class="timerCont">
+                        <div class="timeHoursCont">
+                            <div id="hplusBtn" onclick="timeBtn('add', 'h')" class="plusBtn btn-success pleft">+</div>
+                            <div id="hText" class="timeText">00h</div>
+                            <div id="hminusBtn" onclick="timeBtn('sub', 'h')" class="minusBtn btn-danger mleft">-</div>
+                        </div>
+                        <div class="timeMinCont">
+                            <div id="mplusBtn" onclick="timeBtn('add', 'm')" class="plusBtn  btn-success">+</div>
+                            <div id="mText" class="timeText">00m</div>
+                            <div id="mminusBtn" onclick="timeBtn('sub', 'm')" class="minusBtn btn-danger">-</div>
+                        </div>
+                        <div class="timeSecCont">
+                            <div id="splusBtn" onclick="timeBtn('add', 's')" class="plusBtn btn-success pright">+</div>
+                            <div id="sText" class="timeText">00s</div>
+                            <div id="sminusBtn" onclick="timeBtn('sub', 's')" class="minusBtn btn-danger mright">-</div>
+                        </div>
+                    </div>
+                    <div id="taskList" class="taskList">
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js' integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn'
+        crossorigin='anonymous'></script>
+    <script src='js/main.js'></script>
+</body>
+
+</html>
