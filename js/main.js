@@ -5,6 +5,7 @@ let seconds = 0;
 let breakTime = 5;
 let taskList = [];
 let currentTask = 0;
+
 taskList.add = (num, name, btime, time) => {
     taskList.push({
         number: num,
@@ -19,7 +20,7 @@ let currentlyDoing = 0;
 function displayMessage(type, message) {
     $('#messages').html('');
     let cssClass;
-    type == 'error' ? cssClass = 'danger' : cssClass = 'success';
+    type == 'error' ? cssClass = 'danger' : (type == 'warning' ? cssClass = 'warning' : cssClass = 'success');
     let template = `
     <div class="alert alert-dismissible alert-${cssClass} errorMsg">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -27,6 +28,7 @@ function displayMessage(type, message) {
     `;
     $('#messages').show().append(template).delay(5000).fadeOut(1400);
 }
+
 
 function takeTime(task) {
     return (task.hours * 60 * 60) + (task.minutes * 60) + task.seconds;
@@ -71,6 +73,7 @@ function breakTimer(btimeLeft, btimeTotal) {
                     width: `0%`
                 })
                 currentlyDoing = 0;
+                $('#startBtn').attr('enabled', 'true');
             } else {
                 currentlyDoing++;
                 startTimer(time, time, taskList);
@@ -83,6 +86,8 @@ function breakTimer(btimeLeft, btimeTotal) {
 }
 
 function startTimer(timeLeft, timeTotal, task) {
+    $('#startBtn').attr('enabled', 'false');
+    startBtnClickable = false;
     console.log('Current Task number: ', currentlyDoing);
     console.log(breakTime);
 
@@ -125,14 +130,19 @@ function startTimer(timeLeft, timeTotal, task) {
 }
 
 $('#startBtn').on('click', () => {
-    $('#messages').html('');
-    if (taskList[0] == null) {
-        displayMessage('error', `It seems you didn't add a task. Add a task in the Insert Task section, then Insert the Time, press Add and then Start the timer.`);
+    if ($('#startBtn').attr('enabled') == 'true') {
+        $('#messages').html('');
+        if (taskList[0] == null) {
+            displayMessage('error', `It seems you didn't add a task. Add a task in the Insert Task section, then Insert the Time, press Add and then Start the timer.`);
+        } else {
+            console.log(currentlyDoing);
+            let time = takeTime(taskList[currentlyDoing].time);
+            startTimer(time, time, taskList);
+        }
     } else {
-        console.log(currentlyDoing);
-        let time = takeTime(taskList[currentlyDoing].time);
-        startTimer(time, time, taskList);
+        displayMessage('warning', 'You are currently doing your Pomodoro tasks. If something went wrong refresh the page and start over again!');
     }
+
 
 
 })
@@ -140,6 +150,7 @@ $('#startBtn').on('click', () => {
 
 $('#addtskbtn').on('click', () => {
     let task = $('#taskinput').val();
+    console.log($('#startBtn').attr('enabled'));
     if (task == '') {
         displayMessage('error', `Cannot add a task without a Title. Add the title then the time and then press Add.`);
     } else if (hours == 0 && minutes == 0 && seconds == 0) {
@@ -148,6 +159,7 @@ $('#addtskbtn').on('click', () => {
         console.log(task);
         addTask(task);
     }
+
 })
 
 function addTask(t) {
