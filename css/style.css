@@ -1,31 +1,31 @@
-body{
+body {
     color: #EBE1C7;
 }
+
 .brd {
     border: 1px solid white;
 }
-.container{
+
+.container {
     width: 90vw;
-    /* margin-top: 2em; */
 }
 
-.row{
+.row {
     margin-top: 10px;
 }
-.errorMsg{
-position: absolute;
-width: 100%;
-text-align: center;
+
+.errorMsg {
+    position: absolute;
+    width: 100%;
+    text-align: center;
 }
 
 .left-side {
     margin-top: 50px;
-    /* margin-right: 20px; */
     text-align: center;
     background: rgb(51, 73, 94);
     border-radius: 20px;
-    box-shadow: -1px 3px 20px  black;
-    /* height: 80vh; */
+    box-shadow: -1px 3px 20px black;
 }
 
 .secTitle {
@@ -52,20 +52,19 @@ text-align: center;
     line-height: 6.8em;
     font-size: 3em;
     flex-grow: 1;
-
-    
 }
-.breakCount{
+
+.breakCount {
     flex-grow: 1;
     max-width: 12.3em;
     margin-top: 10%;
-    
-    /* padding-left: 100px; */
 }
-.breakTimeText{
+
+.breakTimeText {
     font-size: 1.5em;
 }
-.startPauseGrp{
+
+.startPauseGrp {
     display: flex;
 }
 
@@ -86,7 +85,6 @@ text-align: center;
 .timeHoursCont,
 .timeMinCont,
 .timeSecCont {
-    /* border: 1px solid white; */
     flex-grow: 1;
 }
 
@@ -104,8 +102,6 @@ text-align: center;
     -ms-user-select: none;
     /* Internet Explorer/Edge */
     user-select: none;
-    /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
 }
 
 .pright {
@@ -123,33 +119,38 @@ text-align: center;
 .mleft {
     border-bottom-left-radius: 11px;
 }
-.timer{
+
+.timer {
     font-size: 3em;
     text-align: right;
     padding-right: 5px;
 }
-.right-side{
+
+.right-side {
     margin-top: 50px;
     text-align: center;
     background: rgb(51, 73, 94);
     border-radius: 20px;
-    box-shadow: -1px 3px 20px  black;
-    /* height: 80vh; */
+    box-shadow: -1px 3px 20px black;
 }
-.margIt{
+
+.margIt {
     margin: 20px;
-    
 }
-.textTimer{
+
+.textTimer {
     font-size: 2em;
     font-weight: 800;
 }
-.control-label{
+
+.control-label {
     font-size: 2em;
 }
-.input-group-addon{
+
+.input-group-addon {
     background: #DF691A;
 }
-.tasks{
+
+.tasks {
     margin: 8px;
 }

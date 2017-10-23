@@ -1,11 +1,11 @@
 let currentTaskNum = 0;
 let hours = 0;
-let minutes = 0;
+let minutes = 25;
 let seconds = 0;
-let breakTime = 0;
+let breakTime = 5;
 let taskList = [];
 let currentTask = 0;
-taskList.add = (num, name,btime, time) => {
+taskList.add = (num, name, btime, time) => {
     taskList.push({
         number: num,
         name: name,
@@ -16,7 +16,7 @@ taskList.add = (num, name,btime, time) => {
 }
 let currentlyDoing = 0;
 
-function displayMessage(type, message){
+function displayMessage(type, message) {
     $('#messages').html('');
     let cssClass;
     type == 'error' ? cssClass = 'danger' : cssClass = 'success';
@@ -33,7 +33,7 @@ function takeTime(task) {
     console.log(time);
 }
 
-function breakTimer(btimeLeft,btimeTotal) {
+function breakTimer(btimeLeft, btimeTotal) {
     console.log('Current Task number: ', currentlyDoing);
     $('.btnText').html('')
 
@@ -56,7 +56,7 @@ function breakTimer(btimeLeft,btimeTotal) {
         btimeLeft = btimeLeft - 1;
 
         let displayTime = `tasklist`;
-        
+
         if (btimeLeft < 0) {
             $('#prgrBar').css({
                 width: `100%`
@@ -64,19 +64,19 @@ function breakTimer(btimeLeft,btimeTotal) {
             clearInterval(countDown);
             console.log(currentlyDoing);
             let time = takeTime(taskList[(currentlyDoing)].time);
-            if(taskList[currentlyDoing + 1] == undefined){
+            if (taskList[currentlyDoing + 1] == undefined) {
                 $('.btnText').html('');
                 $('.btnText').append(`Start`);
                 $('#prgrBar').css({
                     width: `0%`
                 })
                 currentlyDoing = 0;
-            }else{
+            } else {
                 currentlyDoing++;
                 startTimer(time, time, taskList);
             }
-            
-            
+
+
         }
     }, 1000)
 
@@ -85,25 +85,18 @@ function breakTimer(btimeLeft,btimeTotal) {
 function startTimer(timeLeft, timeTotal, task) {
     console.log('Current Task number: ', currentlyDoing);
     console.log(breakTime);
-    
-    $('.btnText').html('')
-    // $('.btnText').css({
-    //     "font-size": "3vh",
-    //     "border": "1px solid white" 
 
-    // })
+    $('.btnText').html('')
+
     $('.btnText').append(`Task <strong>no${task[currentlyDoing].number}</strong>`);
     let countDown = setInterval(() => {
 
-        // let days        = Math.floor(timeLeft/24/60/60);
-        // let hoursLeft   = Math.floor((timeLeft) - (days*86400));
         let hours = Math.floor(timeLeft / 3600);
         let minutesLeft = Math.floor((timeLeft) - (hours * 3600));
         let minutes = Math.floor(minutesLeft / 60);
         let seconds = timeLeft % 60;
 
 
-        // console.log(hours,'h',minutes,'m',seconds,'s');
         $('#disTimer').html(`
         ${(hours <10 ? '0':'')+String(hours)}:${(minutes <10 ? '0':'')+String(minutes)}:${(seconds <10 ? '0':'')+String(seconds)}
         `);
@@ -121,21 +114,21 @@ function startTimer(timeLeft, timeTotal, task) {
                 width: `100%`
             })
             clearInterval(countDown);
-            console.log('Current Task number: ',currentlyDoing);
-            breakTimer((taskList[0].break_time)*60,(taskList[0].break_time*60));
+            console.log('Current Task number: ', currentlyDoing);
+            breakTimer((taskList[0].break_time) * 60, (taskList[0].break_time * 60));
 
         }
     }, 1000)
-    
 
-    
+
+
 }
 
 $('#startBtn').on('click', () => {
     $('#messages').html('');
-    if(taskList[0] == null){
+    if (taskList[0] == null) {
         displayMessage('error', `It seems you didn't add a task. Add a task in the Insert Task section, then Insert the Time, press Add and then Start the timer.`);
-    }else{
+    } else {
         console.log(currentlyDoing);
         let time = takeTime(taskList[currentlyDoing].time);
         startTimer(time, time, taskList);
@@ -147,16 +140,14 @@ $('#startBtn').on('click', () => {
 
 $('#addtskbtn').on('click', () => {
     let task = $('#taskinput').val();
-    if(task == ''){
+    if (task == '') {
         displayMessage('error', `Cannot add a task without a Title. Add the title then the time and then press Add.`);
-    }else if(hours == 0 && minutes == 0 && seconds ==0){
-        displayMessage('error',`Add the time to your task!!`);
-    }else{
-        
+    } else if (hours == 0 && minutes == 0 && seconds == 0) {
+        displayMessage('error', `Add the time to your task!!`);
+    } else {
         console.log(task);
         addTask(task);
     }
-
 })
 
 function addTask(t) {
@@ -171,7 +162,6 @@ function addTask(t) {
             
         </div>
     </div>
-    
     `
     taskList.add(currentTaskNum, t, breakTime, {
         'hours': hours,
@@ -182,53 +172,6 @@ function addTask(t) {
     $('#taskList').append(taskTemplate);
     console.log(taskList);
 }
-
-
-// function timeBtn(action, time) {
-//     if (action == 'add') {
-//         switch (time) {
-//             case 'h':
-//                 hours++;
-//                 $('#hText').text((hours < 10 ? '0' : '') + String(hours) + 'h');
-//                 break;
-//             case 'm':
-//                 minutes++;
-//                 $('#mText').text((minutes < 10 ? '0' : '') + String(minutes) + 'm');
-//                 break;
-//             case 's':
-//                 seconds++;
-//                 $('#sText').text((seconds < 10 ? '0' : '') + String(seconds) + 's');
-//                 break;
-//             case 'b':
-//                 breakTime++;
-//                 $('#bText').text((breakTime < 10 ? '0' : '') + String(breakTime) + 'm');
-//                 break;
-//             default:
-//                 break;
-//         }
-//     } else {
-//         switch (time) {
-//             case 'h':
-//                 hours--;
-//                 $('#hText').text((hours < 10 ? '0' : '') + String(hours) + 'h');
-//                 break;
-//             case 'm':
-//                 minutes--;
-//                 $('#mText').text((minutes < 10 ? '0' : '') + String(minutes) + 'm');
-//                 break;
-//             case 's':
-//                 seconds--;
-//                 $('#sText').text((seconds < 10 ? '0' : '') + String(seconds) + 's');
-//                 break;
-//             case 'b':
-//                 breakTime--;
-//                 $('#bText').text((breakTime < 10 ? '0' : '') + String(breakTime) + 'm');
-//                 break;
-//             default:
-//                 break;
-//         }
-//     }
-// }
 
 function timeBtn(action, time) {
     switch (time) {
